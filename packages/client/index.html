@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>流媒体播放器flv.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #videoElement {
+        width: 800px;
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <video id="videoElement"></video>
+    <button id="playBtn">播放</button>
+    <button id="pauseBtn">暂停</button>
+
+    <script src="https://cdn.bootcss.com/flv.js/1.5.0/flv.min.js"></script>
+    <script>
+      if (flvjs.isSupported()) {
+        var videoElement = document.getElementById('videoElement');
+        var flvPlayer = flvjs.createPlayer({
+          type: 'flv',
+          url: 'http://localhost:8000/live/x.flv',
+        });
+        flvPlayer.attachMediaElement(videoElement);
+        flvPlayer.load();
+        document.getElementById('playBtn').addEventListener('click', (e) => {
+          console.log('e: ', e);
+          flvPlayer.play();
+        });
+        document.getElementById('pauseBtn').addEventListener('click', (e) => {
+          console.log('e: ', e);
+          flvPlayer.pause();
+        });
+      }
+    </script>
+  </body>
+</html>
